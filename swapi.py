@@ -5,12 +5,12 @@ class APIRequester:
     def __init__(self, base_url):
         self.base_url = base_url
 
-    def get(self):
+    def get(self, url):
         try:
-            response = requests.get(self.base_url)
+            response = requests.get(self.base_url + url)
             response.raise_for_status()
         except requests.RequestException:
-            print('Something went wrong.')
+            print('Возникла ошибка при выполнении запроса')
             return None
         else:
             return response
@@ -29,4 +29,4 @@ def save_sw_data():
 
 
 apr = APIRequester('https://swapi.dev/')
-print(apr.get())
+print(apr.get('api/'))
