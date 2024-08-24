@@ -3,10 +3,17 @@ import requests
 
 class APIRequester:
     def __init__(self, base_url):
-        pass
+        self.base_url = base_url
 
     def get(self):
-        pass
+        try:
+            response = requests.get(self.base_url)
+            response.raise_for_status()
+        except requests.RequestException:
+            print('Something went wrong.')
+            return None
+        else:
+            return response
 
 
 class SWRequester(APIRequester):
@@ -19,3 +26,7 @@ class SWRequester(APIRequester):
 
 def save_sw_data():
     pass
+
+
+apr = APIRequester('https://swapi.dev/')
+print(apr.get())
