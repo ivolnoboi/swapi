@@ -11,17 +11,22 @@ class APIRequester:
             response.raise_for_status()
         except requests.RequestException:
             print('Возникла ошибка при выполнении запроса')
-            return None
         else:
             return response
 
 
 class SWRequester(APIRequester):
     def get_sw_categories(self):
-        pass
+        response = self.get('/')
+        if response:
+            return response.json().keys()
+        return {}.keys()
 
     def get_sw_info(self, sw_type):
-        pass
+        response = self.get('/' + sw_type + '/')
+        if response:
+            return response.text
+        return ''
 
 
 def save_sw_data():
@@ -29,4 +34,4 @@ def save_sw_data():
 
 
 apr = APIRequester('https://swapi.dev/')
-print(apr.get('api/'))
+print(apr.get('api/').json().keys())
