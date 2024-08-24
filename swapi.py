@@ -31,7 +31,7 @@ class SWRequester(APIRequester):
 
 
 def save_sw_data():
-    Path("data").mkdir(exist_ok=True)
+    Path('data').mkdir(exist_ok=True)
     swapi_requester = SWRequester('https://swapi.dev/api')
     categories = swapi_requester.get_sw_categories()
     for category in categories:
