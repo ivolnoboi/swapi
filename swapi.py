@@ -43,12 +43,13 @@ class SWRequester(APIRequester):
 
 def save_sw_data():
     """Save information about all categories on The Star Wars to files."""
-    Path('data').mkdir(exist_ok=True)
+    dir_name = 'data'
+    Path(dir_name).mkdir(exist_ok=True)
 
     swapi_requester = SWRequester('https://swapi.dev/api')
     categories = swapi_requester.get_sw_categories()
 
     for category in categories:
         info = swapi_requester.get_sw_info(category)
-        with open(f'data/{category}.txt', 'w') as file:
+        with open(f'{dir_name}/{category}.txt', 'w') as file:
             file.write(info)
